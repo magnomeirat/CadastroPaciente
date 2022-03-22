@@ -1,0 +1,180 @@
+﻿@model CadastroPaciente.Models.Paciente
+
+@{
+    ViewData["Title"] = "View";
+}
+
+
+<div>
+    <h4>Dados Cadastrais do Paciente</h4>
+    <hr />
+</div>
+
+
+<form>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputPassword4">Código</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.cd_paciente)" readonly>
+
+        </div>
+        <div class="form-group col-md-6">
+            <label>Data de Nascimento</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.data_nascimento)" readonly>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputEmail4">Nome</label>
+            <input type="email" class="form-control" value="@Html.DisplayFor(model => model.nome)" readonly>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputPassword4">Nome da Mãe</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.nome_mae)" readonly>
+        </div>
+    </div>
+    <div class="form-row">
+        @*<div class="form-group col-md-6">
+                <label for="inputEmail4">Email MV</label>
+                @if (Model.e_mail != "null")
+                {
+                    <input type="email" class="form-control" value="@Html.DisplayFor(model => model.e_mail)" readonly>
+                }
+                else
+                {
+                    <input type="email" class="form-control" readonly>
+                }
+            </div>*@
+        <div class="form-group col-md-6">
+            <label for="celularMV">Celular MV</label>
+            @if (Model.celular != "null")
+            {
+                <input type="email" class="form-control" id="celularMV" value="@Html.DisplayFor(model => model.celular)" readonly />
+            }
+            else
+            {
+                <input type="email" class="form-control" id="celularMV" readonly />
+            }
+
+        </div>
+
+        
+       
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="celularMV">Outros Telefones MV:</label>
+            @foreach (TelefonesMV telefonesmv in Model.telefonesMV)
+            {
+                <br />
+                <input type="text" class="form-control" value="@telefonesmv.tipo: @telefonesmv.telefone" readonly />
+
+            }
+        </div>
+    </div>
+        @*<div class="form-group">
+                <label for="inputAddress">Endereço</label>
+                @if (Model.endereco != "null")
+                {
+                    <input type="text" class="form-control" id="inputAddress" value="@Html.DisplayFor(model => model.endereco)" readonly />
+                }
+                else
+                {
+                    <input type="text" class="form-control" id="inputAddress" readonly />
+                }
+            </div>*@
+
+        @*<label>Carteirinha: </label>
+
+            <input type="text" class="form-control" id="emailsBenner@email" value="@Html.DisplayFor(model => model.dadosBenner.matricula)" readonly />
+            <br />*@
+
+        @*<label>Emails no Benner:</label>
+            @foreach (string email in Model.dadosBenner.emails)
+            {
+
+                <input type="text" class="form-control" id="emailsBenner@email" value="@email" readonly />
+                <br />
+            }*@
+
+
+
+        <div class="form-row">
+            <label>Outros Telefones:</label>
+        </div>
+
+        <table class="table-bordered" width="100%">
+            <tr class="table-primary">
+                <td class="table-primary"><h6>Tel 1</h6></td>
+                <td class="table-primary"><h6>Tel 2</h6></td>
+                <td class="table-primary"><h6>Cel</h6></td>
+                <td class="table-primary"><h6>Fax</h6></td>
+            </tr>
+            @{var enderecoFull = "";}
+
+            @foreach (EnderecoBenner endereco in Model.enderecosBenner)
+            {
+
+                <tr class="table-primary">
+                    @if (endereco.tel1 != "null")
+                    {
+                        <td class="table-primary"><label>@endereco.tel1</label></td>
+
+                    }
+                    else
+                    {
+                        <td class="table-primary"></td>
+                    }
+
+                    @if (endereco.tel2 != "null")
+                    {
+                        <td class="table-primary"><label>@endereco.tel2</label></td>
+                    }
+                    else
+                    {
+                        <td class="table-primary"></td>
+                    }
+
+
+
+                    @if (endereco.cel != "null")
+                    {
+                        <td class="table-primary"><label>@endereco.cel</label></td>
+                    }
+                    else
+                    {
+                        <td class="table-primary"></td>
+                    }
+
+
+
+                    @if (endereco.fax != "null")
+                    {
+                        <td class="table-primary"><label>@endereco.fax</label></td>
+                    }
+                    else
+                    {
+                        <td class="table-primary"></td>
+                    }
+
+                    @{ enderecoFull = endereco.endereco;}
+                </tr>
+
+            }
+
+            @*<tr class="table-primary">
+                    <td class="table-primary" colspan="4"><label>@enderecoFull</label></td>
+                </tr>*@
+
+        </table>
+
+
+
+</form>
+
+<hr />
+<div>
+    
+    <a href="/home">Voltar</a>
+</div>

@@ -1,0 +1,43 @@
+﻿@model CadastroPaciente.Models.Usuario
+
+@{
+    ViewData["Title"] = "View";
+}
+
+
+
+<h4>Login</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="autenticar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="usuario" class="control-label"></label>
+                <input asp-for="usuario" class="form-control" required />
+                <span asp-validation-for="usuario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="senha" class="control-label"></label>
+                <input asp-for="senha" type="password" class="form-control" required />
+                <span asp-validation-for="senha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Entrar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@{
+    if (ViewBag.Erro != "null"){
+        
+        <h2> @ViewBag.Erro</h2>
+
+    }
+}
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

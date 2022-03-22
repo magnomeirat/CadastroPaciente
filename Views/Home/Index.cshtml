@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Consultar</h1>
+    <form action="/home" class="form_busca" method="post">
+        <div class="tipo_consulta">
+            <span><input type="radio" name="tipo" value="1" /> Código do Paciente</span>
+            <span><input type="radio" name="tipo" value="2" checked /> Nome</span>
+            <span><input type="radio" name="tipo" value="3" /> CPF</span>
+        </div>
+        <input type="text" class="input_busca" name="pesquisa" />
+        
+        <input class="btn btn-primary" type="submit" value="Pesquisar">
+    </form>
+</div>
+<div class="dados">
+    <table class="table">
+        <tr>
+            <td>Código</td>
+            <td>Nome</td>
+            <td>Nome da Mãe</td>
+            <td>Data Nascimento</td>
+            <td>Ver</td>
+        </tr>
+
+        @try {
+            @foreach (Paciente paciente in @ViewBag.pacientes)
+            {
+    <tr>
+        <td>@paciente.cd_paciente</td>
+        <td>@paciente.nome</td>
+        <td>@paciente.nome_mae</td>
+        <td>@paciente.data_nascimento</td>
+        <td><a href='@Url.Action("index", "paciente", new { paciente = paciente.cd_paciente})'> <img src="/imgs/olhoVisualizar.png" width="30" /></a></td>
+    </tr>
+            }
+        }catch(Exception ex){
+            @ex.Message
+        }
+    </table>
+</div>
